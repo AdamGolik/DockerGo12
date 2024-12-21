@@ -1,0 +1,22 @@
+# Config file for Air (https://github.com/cosmtrek/air)
+
+[build]
+# Ścieżka do katalogu z kodem aplikacji
+cmd = "go build -o ./tmp/main"
+# Ścieżka do binarnego pliku wynikowego
+bin = "./tmp/main"
+# Komenda do uruchomienia aplikacji po skompilowaniu
+run = "./tmp/main"
+
+# Ścieżki do obserwowanych plików
+[watch]
+dirs = ["."]
+# Wyklucz katalogi, które nie muszą być monitorowane np. systemowe lub cache
+exclude_dirs = ["tmp", "vendor", "node_modules"]
+
+# Typy plików, które będą obserwowane
+extensions = [".go", ".tpl", ".html"]
+
+# Opcje logowania
+[log]
+level = "debug"
