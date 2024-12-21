@@ -1,20 +1,19 @@
 version: '3.8'
 
 services:
-  # Baza danych MySQL
-  mysql:
-    image: mysql:8.0
-    container_name: mysql_container
+  # Baza danych PostgreSQL
+  postgres:
+    image: postgres:15
+    container_name: postgres_container
     restart: always
     environment:
-      MYSQL_ROOT_PASSWORD: adamgolik113
-      MYSQL_DATABASE: go2
-      MYSQL_USER: root
-      MYSQL_PASSWORD: adamgolik113
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: adamgolik113
+      POSTGRES_DB: go2
     ports:
-      - "3306:3306"
+      - "5432:5432"
     volumes:
-      - mysql_data:/var/lib/mysql
+      - postgres_data:/var/lib/postgresql/data
     networks:
       - app_network
 
@@ -28,19 +27,19 @@ services:
     ports:
       - "8080:8080"
     environment:
-      DB_HOST: mysql
-      DB_PORT: 3306
-      DB_USER: root
+      DB_HOST: postgres
+      DB_PORT: 5432
+      DB_USER: postgres
       DB_PASSWORD: adamgolik113
       DB_NAME: go2
-      SECRET_KEY: qzawxsecdrvftbgyhnujimko,1234567890-= # JWT Secret Key
+      SECRET_KEY: qzawxsecdrvftbgyhnujimko,1234567890-=
     depends_on:
-      - mysql
+      - postgres
     networks:
       - app_network
 
 volumes:
-  mysql_data:
+  postgres_data:
 
 networks:
   app_network:
